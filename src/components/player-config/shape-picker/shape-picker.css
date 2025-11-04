@@ -1,0 +1,43 @@
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.shape-btn {
+  height: 50px; 
+  padding: 0 0.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shape-btn:hover { border-color: #a0aec0; }
+.shape-btn.selected {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.shape-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.shape-icon.circle { border-radius: 50%; background: currentColor; }
+.shape-icon.square { border-radius: 4px; background: currentColor; }
+.shape-icon.star {
+  background: currentColor;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.shape-icon.diamond {
+  background: currentColor;
+  transform: rotate(45deg);
+  width: 26px;
+  height: 26px;
+  margin: 3px;
+}
