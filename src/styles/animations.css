@@ -1,0 +1,9 @@
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  20%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

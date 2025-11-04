@@ -1,0 +1,21 @@
+.game-chip {
+  width: 40px;
+  height: 40px;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+}
+
+.game-chip.circle { border-radius: 50%; }
+.game-chip.square { border-radius: 8px; }
+.game-chip.star { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.game-chip.diamond { transform: rotate(45deg); width: 32px; height: 32px; margin: 4px; border-radius: 8px; }
+
+.win-chip {
+  animation: pulse 1s infinite;
+  border-color: #ffd700;
+}
+
+@media (max-width: 768px) {
+  .game-chip { width: 32px; height: 32px; }
+  .game-chip.diamond { width: 26px; height: 26px; }
+}
