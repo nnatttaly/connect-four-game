@@ -12,17 +12,17 @@ const createEmptyBoard = (): GameBoard =>
 export const useGameEngine = () => {
   const [moveHistory, setMoveHistory] = useState<number[]>([]);
   const [steps, setSteps] = useState<Record<string, GameStep>>(validator([]));
-  const [history, setHistory] = useState<number[][]>([[]]); // Для Undo/Redo
+  const [history, setHistory] = useState<number[][]>([[]]);
   const [historyIndex, setHistoryIndex] = useState(0);
 
   const currentStepKey = `step_${moveHistory.length}`;
   const currentStep = steps[currentStepKey] || steps.step_0;
 
   const board = createEmptyBoard();
-  currentStep.positions.first.forEach(([r, c]) => {
+  currentStep.positions.player_1.forEach(([r, c]) => { 
     board[r][c] = "first";
   });
-  currentStep.positions.second.forEach(([r, c]) => {
+  currentStep.positions.player_2.forEach(([r, c]) => { 
     board[r][c] = "second";
   });
 
@@ -30,7 +30,15 @@ export const useGameEngine = () => {
 
   const makeMove = useCallback(
     (col: number) => {
-      if (currentStep.status !== "pending") return;
+
+      if (
+        !(
+          currentStep.status === "pending" ||
+          (currentStep.status === "waiting" && moveHistory.length === 0)
+        )
+      ) {
+        return;
+      }
 
       const isColumnFull = board[0][col] !== "empty";
       if (isColumnFull) return;

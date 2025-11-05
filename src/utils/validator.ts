@@ -5,8 +5,12 @@ export const validator = (moves: number[]): Record<string, GameStep> => {
   const board = Array(BOARD_ROWS)
     .fill(null)
     .map(() => Array(BOARD_COLS).fill(0));
+
   const steps: Record<string, GameStep> = {
-    step_0: { positions: { first: [], second: [] }, status: "pending" },
+    step_0: {
+      positions: { player_1: [], player_2: [] },
+      status: "waiting", 
+    },
   };
 
   const getPositions = (player: 1 | 2): [number, number][] => {
@@ -81,10 +85,13 @@ export const validator = (moves: number[]): Record<string, GameStep> => {
 
     const key = `step_${i + 1}`;
     steps[key] = {
-      positions: { first: getPositions(1), second: getPositions(2) },
+      positions: {
+        player_1: getPositions(1),
+        player_2: getPositions(2),
+      },
       status: winLine ? "win" : isDraw ? "draw" : "pending",
       winner: winLine
-        ? { who: player === 1 ? "first" : "second", positions: winLine }
+        ? { who: player === 1 ? "player_1" : "player_2", positions: winLine }
         : undefined,
     };
 
