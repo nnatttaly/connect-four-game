@@ -6,16 +6,27 @@ import GameControls from "../components/game/game-controls";
 import type { Player } from "../types/index";
 import { AppRoute } from "../consts/routes";
 import { PLAYER_COLORS } from "../consts/colors";
-import "../styles//pages/game/chip.css";
-import "../styles//pages/game/game-page.css";
-import "../styles//pages/game/toast.css";
+import "../styles/pages/game/chip.css";
+import "../styles/pages/game/game-page.css";
+import "../styles/pages/game/toast.css";
 
 
 export default function GamePage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { board, currentPlayer, status, winner, makeMove, reset } =
-    useGameEngine();
+
+  const {
+    board,
+    currentPlayer,
+    status,
+    winner,
+    makeMove,
+    reset,
+    undo,
+    redo,
+    canUndo,
+    canRedo
+  } = useGameEngine();
 
   const playersData = location.state as {
     firstPlayer: Player;
@@ -71,6 +82,10 @@ export default function GamePage() {
         <GameControls
           onRestart={reset}
           onBack={() => navigate(AppRoute.PlayersSetupPage)}
+          onUndo={undo}
+          onRedo={redo}
+          canUndo={canUndo}
+          canRedo={canRedo}
         />
       </div>
     </div>
